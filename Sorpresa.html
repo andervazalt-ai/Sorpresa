@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi novia?</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ff69b4);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2em;
+    color: white;
+    text-shadow: 2px 2px 8px #ff1493;
+    margin-bottom: 40px;
+  }
+
+  .botones {
+    display: flex;
+    gap: 30px;
+  }
+
+  button {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #si {
+    background-color: #ff69b4;
+    color: white;
+  }
+
+  #si:hover {
+    background-color: #ff1493;
+    transform: scale(1.1);
+  }
+
+  #no {
+    background-color: #f1f1f1;
+    color: #333;
+    position: absolute;
+  }
+
+  /* Corazones */
+  .corazon {
+    position: fixed;
+    font-size: 2rem;
+    animation: flotar 3s linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes flotar {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-150vh) scale(1.5); }
+  }
+</style>
+</head>
+<body>
+
+  <h1>¿Quieres ser mi novia? 💞</h1>
+  <div class="botones">
+    <button id="si">Sí 🥰</button>
+    <button id="no">No :(</button>
+  </div>
+
+  <script>
+    const btnNo = document.getElementById('no');
+    const btnSi = document.getElementById('si');
+
+    // Evita que el "No" se toque
+    btnNo.addEventListener('mouseenter', moverBoton);
+    btnNo.addEventListener('touchstart', moverBoton); // para móvil
+
+    function moverBoton() {
+      const x = Math.random() * (window.innerWidth - btnNo.clientWidth);
+      const y = Math.random() * (window.innerHeight - btnNo.clientHeight - 50);
+      btnNo.style.left = `${x}px`;
+      btnNo.style.top = `${y}px`;
+    }
+
+    // Celebración al decir Sí
+    btnSi.addEventListener('click', () => {
+      for (let i = 0; i < 40; i++) {
+        crearCorazon();
+      }
+      alert("¡Sabía que dirías que sí! 💖💫");
+    });
+
+    function crearCorazon() {
+      const corazon = document.createElement('div');
+      corazon.classList.add('corazon');
+      corazon.textContent = '💖';
+      corazon.style.left = Math.random() * 100 + 'vw';
+      corazon.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.body.appendChild(corazon);
+
+      setTimeout(() => corazon.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
